@@ -48,8 +48,23 @@ void debugger_run(debugger_t *dbg)
 
 void debugger_set_breakpoint_at_address(debugger_t *dbg, intptr_t address)
 {
-    printf("Setting breakpoint at 0x%x", address);
+    printf("Setting breakpoint at 0x%x\n", address);
     breakpoint_t brk = {dbg->pid, address, false, 0};
     breakpoint_enable(&brk);
-    dbg->breakpoints[address] = &brk;
+    int count = 0;
+    if (dbg->breakpoints != NULL) {
+        for (; dbg->breakpoints[count]; ++count)
+            ;
+        dbg->breakpoints =
+            realloc(dbg->breakpoints, sizeof(breakpoint_t) * (count + 1));
+        if (!dbg->breakpoints) DEBUGGER_MALLOC_CHECK
+        // TODO: this should be a hashmap...
+        dbg->breakpoints[count] = NULL;
+        dbg->breakpoints[count - 1] =
+            &brk; // NOTE: and this should be dbg->breakpoints[address] = &brk;
+                  // but its not a hashmap...
+    } else {
+        dbg->breakpoints = malloc(sizeof(breakpoint_t) * 2);
+        dbg->breakpoints[1] = NULL;
+    }
 }

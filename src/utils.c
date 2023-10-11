@@ -9,8 +9,6 @@ void malloc_error(char *file, int line)
     exit(1);
 }
 
-#define DEBUGGER_MALLOC_CHECK malloc_error(__FILE__, __LINE__);
-
 char **split(char const *line, char *delimiter)
 {
     size_t size = 0;
