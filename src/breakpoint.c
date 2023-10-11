@@ -22,4 +22,4 @@ void breakpoint_disable(breakpoint_t *brk)
 
 bool breakpoint_is_enabled(breakpoint_t *brk) { return brk->enabled; }
 
-void *breakpoint_get_address(breakpoint_t *brk) { return brk->addr; }
+intptr_t breakpoint_get_address(breakpoint_t *brk) { return brk->addr; }

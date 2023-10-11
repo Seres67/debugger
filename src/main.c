@@ -13,7 +13,7 @@ int main(int ac, char **av)
         return 1;
     }
     size_t size = strlen(av[1]);
-    char *prog_name = malloc((size + 1) * sizeof(char));
+    char *prog_name = (char *)malloc((size + 1) * sizeof(char));
     prog_name[size] = 0;
     if (!prog_name) {
         fprintf(stderr, "couldn't allocate memory");
