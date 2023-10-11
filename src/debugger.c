@@ -2,6 +2,7 @@
 #include "include/utils.h"
 #include <replxx.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/ptrace.h>
 #include <sys/wait.h>
 
@@ -21,6 +22,9 @@ void debugger_handle_command(debugger_t *dbg, char const *line)
 
     if (is_prefix(command, "continue")) {
         debugger_continue_execution(dbg);
+    } else if (is_prefix(command, "break")) {
+        char *address = &command[2];
+        debugger_set_breakpoint_at_address(dbg, strtol(address, 0, 16));
     } else {
         fprintf(stderr, "unknown command\n");
     }
@@ -40,4 +44,12 @@ void debugger_run(debugger_t *dbg)
         replxx_history_add(repl, line);
     }
     replxx_end(repl);
+}
+
+void debugger_set_breakpoint_at_address(debugger_t *dbg, intptr_t address)
+{
+    printf("Setting breakpoint at 0x%x", address);
+    breakpoint_t brk = {dbg->pid, address, false, 0};
+    breakpoint_enable(&brk);
+    dbg->breakpoints[address] = &brk;
 }
