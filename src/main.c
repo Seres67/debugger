@@ -25,6 +25,6 @@ int main(int ac, char **av)
     } else if (pid >= 1) {
         printf("started debugging %d\n", pid);
         debugger_t dbg = {prog_name, pid};
-        debugger_run(dbg);
+        debugger_run(&dbg);
     }
 }

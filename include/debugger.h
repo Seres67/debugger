@@ -9,6 +9,8 @@ struct debugger_s
 };
 typedef struct debugger_s debugger_t;
 
-void debugger_run(debugger_t dbg);
+void debugger_run(debugger_t *dbg);
+void debugger_handle_command(debugger_t *dbg, char const *line);
+void debugger_continue_execution(debugger_t *dbg);
 
 #endif // !_DEBUGGER_DEBUGGER_H
