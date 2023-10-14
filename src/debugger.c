@@ -103,15 +103,6 @@ void debugger_handle_command(debugger_t *dbg, char const *line)
             debugger_write_memory(dbg, strtol(address, 0, 16),
                                   strtol(value, 0, 16));
         }
-    } else if (is_prefix(command, "test")) {
-        struct user_regs_struct regs;
-        ptrace(PTRACE_GETREGS, dbg->pid, NULL, &regs);
-        perror("getregs");
-        printf("rip: %llx\n", regs.rip);
-        ptrace(PTRACE_POKEDATA, dbg->pid, regs.rip, strtol(&args[1][2], 0, 16));
-        perror("pokedata");
-        ptrace(PTRACE_GETREGS, dbg->pid, NULL, &regs);
-        printf("rip: %llx\n", regs.rip);
     } else {
         fprintf(stderr, "unknown command\n");
     }
