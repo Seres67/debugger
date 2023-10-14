@@ -6,6 +6,14 @@
 #include <sys/ptrace.h>
 #include <unistd.h>
 
+void free_memory(debugger_t dbg)
+{
+    for (int i = 0; dbg.breakpoints[i]; ++i)
+        free(dbg.breakpoints[i]);
+    free(dbg.breakpoints);
+    free(dbg.prog_name);
+}
+
 int main(int ac, char **av)
 {
     if (ac < 2) {
@@ -32,5 +40,6 @@ int main(int ac, char **av)
         printf("started debugging %d\n", pid);
         debugger_t dbg = {prog_name, pid, NULL};
         debugger_run(&dbg);
+        free_memory(dbg);
     }
 }

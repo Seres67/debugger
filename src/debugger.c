@@ -106,6 +106,9 @@ void debugger_handle_command(debugger_t *dbg, char const *line)
     } else {
         fprintf(stderr, "unknown command\n");
     }
+    for (int i = 0; args[i]; ++i)
+        free(args[i]);
+    free(args);
 }
 
 void debugger_run(debugger_t *dbg)

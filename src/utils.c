@@ -30,6 +30,7 @@ char **split(char const *line, char const *delimiter)
         strcpy(splitted_line[i], token);
         token = strtok(NULL, delimiter);
     }
+    free(line_copy);
     return splitted_line;
 }
 
