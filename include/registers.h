@@ -1,5 +1,5 @@
-#ifndef _DEBUGGER_REGISTERS_H
-#define _DEBUGGER_REGISTERS_H
+#ifndef DEBUGGER_REGISTERS_H
+#define DEBUGGER_REGISTERS_H
 
 #include <stdint.h>
 #include <stdlib.h>
@@ -83,4 +83,4 @@ uint64_t get_register_value_from_dwarf(pid_t pid, unsigned reg_number);
 char *get_register_name(registers_t reg);
 registers_t get_register_from_name(char *name);
 
-#endif // !_DEBUGGER_REGISTERS_H
+#endif // !DEBUGGER_REGISTERS_H

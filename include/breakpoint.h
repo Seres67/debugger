@@ -1,5 +1,5 @@
-#ifndef _DEBUGGER_BREAKPOINT_H
-#define _DEBUGGER_BREAKPOINT_H
+#ifndef DEBUGGER_BREAKPOINT_H
+#define DEBUGGER_BREAKPOINT_H
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -20,4 +20,4 @@ void breakpoint_disable(breakpoint_t *brk);
 bool breakpoint_is_enabled(breakpoint_t *brk);
 intptr_t breakpoint_get_address(breakpoint_t *brk);
 
-#endif // !_DEBUGGER_BREAKPOINT_H
+#endif // !DEBUGGER_BREAKPOINT_H

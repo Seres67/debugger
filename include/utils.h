@@ -1,5 +1,5 @@
-#ifndef _DEBUGGER_UTILS_H
-#define _DEBUGGER_UTILS_H
+#ifndef DEBUGGER_UTILS_H
+#define DEBUGGER_UTILS_H
 
 #include <stdbool.h>
 
@@ -9,4 +9,4 @@ char **split(char const *line, char const *delimiter);
 bool is_prefix(char *s, char const *of);
 _Noreturn void malloc_error(char const *file, int line);
 
-#endif // !_DEBUGGER_UTILS_H
+#endif // !DEBUGGER_UTILS_H

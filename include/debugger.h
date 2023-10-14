@@ -1,5 +1,5 @@
-#ifndef _DEBUGGER_DEBUGGER_H
-#define _DEBUGGER_DEBUGGER_H
+#ifndef DEBUGGER_DEBUGGER_H
+#define DEBUGGER_DEBUGGER_H
 
 #include "breakpoint.h"
 #include <stdint.h>
@@ -18,4 +18,4 @@ void debugger_handle_command(debugger_t *dbg, char const *line);
 void debugger_continue_execution(debugger_t *dbg);
 void debugger_set_breakpoint_at_address(debugger_t *dbg, intptr_t address);
 
-#endif // !_DEBUGGER_DEBUGGER_H
+#endif // !DEBUGGER_DEBUGGER_H
