@@ -9,6 +9,7 @@ uint64_t get_register_value(pid_t pid, registers_t reg)
 {
     struct user_regs_struct regs;
     ptrace(PTRACE_GETREGS, pid, NULL, &regs);
+    perror("get_register_value");
     uint64_t register_pos = N_REGISTERS;
     for (int i = 0; i < N_REGISTERS; ++i)
         if (REGISTER_DESCRIPTORS[i].reg == reg) register_pos = i;
@@ -23,6 +24,7 @@ void set_register_value(pid_t pid, registers_t reg, uint64_t value)
 {
     struct user_regs_struct regs;
     ptrace(PTRACE_GETREGS, pid, NULL, &regs);
+    perror("set_register_value");
     uint64_t register_pos = N_REGISTERS;
     for (int i = 0; i < N_REGISTERS; ++i)
         if (REGISTER_DESCRIPTORS[i].reg == reg) register_pos = i;
@@ -31,6 +33,7 @@ void set_register_value(pid_t pid, registers_t reg, uint64_t value)
         return;
     }
     *((uint64_t *)&regs + register_pos) = value;
+    ptrace(PTRACE_SETREGS, pid, NULL, &regs);
 }
 
 uint64_t get_register_value_from_dwarf(pid_t pid, unsigned reg_number)
