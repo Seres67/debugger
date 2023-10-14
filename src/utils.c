@@ -17,19 +17,16 @@ char **split(char const *line, char const *delimiter)
         if (line[size] == *delimiter) ++nb_of_elements;
     }
     char *line_copy = (char *)malloc(sizeof(char) * (strlen(line) + 1));
-    if (!line_copy) {
-        DEBUGGER_MALLOC_CHECK
-    }
+    if (!line_copy) DEBUGGER_MALLOC_CHECK
     strcpy(line_copy, line);
     char **splitted_line =
         (char **)malloc(sizeof(char *) * (nb_of_elements + 2));
+    if (!splitted_line) DEBUGGER_MALLOC_CHECK
     splitted_line[nb_of_elements + 1] = NULL;
     char *token = strtok(line_copy, delimiter);
     for (int i = 0; token != NULL; ++i) {
         splitted_line[i] = (char *)malloc(sizeof(char) * (strlen(token) + 1));
-        if (!splitted_line[i]) {
-            DEBUGGER_MALLOC_CHECK
-        }
+        if (!splitted_line[i]) DEBUGGER_MALLOC_CHECK
         strcpy(splitted_line[i], token);
         token = strtok(NULL, delimiter);
     }

@@ -5,7 +5,7 @@
 void breakpoint_enable(breakpoint_t *brk)
 {
     uint64_t data = ptrace(PTRACE_PEEKDATA, brk->pid, brk->addr, NULL);
-    brk->saved_data = (uint8_t)(data & 0xff);
+    brk->saved_data = (uint8_t)(data & 0xFF);
     uint64_t int3 = 0xCC;
     uint64_t data_int3 = ((data & ~0xFF) | int3);
     ptrace(PTRACE_POKEDATA, brk->pid, brk->addr, data_int3);
